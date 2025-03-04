@@ -1,6 +1,6 @@
 {
   "name": "TikZ Spin Chain",
-  "image": "ghcr.io/latexdev/docker-texlive:latest",
+  "image": "texlive/texlive:latest",
   "extensions": [
     "james-yu.latex-workshop"
   ],
