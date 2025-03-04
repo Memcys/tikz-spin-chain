@@ -1,12 +1,13 @@
 {
   "name": "TikZ Spin Chain",
-  "image": "ghcr.io/latexdev/docker-texlive:latest",
+  "image": "texlive/texlive:latest",
   "extensions": [
     "james-yu.latex-workshop"
   ],
   "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "latex-workshop.latex.recipe.default": "lastUsed"
   },
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y imagemagick",
-  "remoteUser": "vscode"
+  "postCreateCommand": "apt-get update && apt-get install -y imagemagick",
+  // "remoteUser": "vscode"
 }
