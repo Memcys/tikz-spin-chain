@@ -1,0 +1,102 @@
+% ! TEX program = lualatex
+
+\documentclass[tikz]{standalone}
+
+
+\usepackage{tikz}
+\usepackage{xcolor}
+
+
+\usetikzlibrary{
+    graphs,
+    arrows.meta,
+    decorations.pathmorphing,
+    decorations.markings,
+    positioning,
+    shapes.multipart,
+}
+
+\definecolor{color_oddbond_fill}{HTML}{AED8FF}
+\definecolor{color_oddbond_draw}{HTML}{5789CE}
+
+\definecolor{color_evenbond_fill}{HTML}{D4BBAC}
+\definecolor{color_evenbond_draw}{HTML}{5C3422}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    decoration={coil,aspect=0.05,segment length=0.5mm,amplitude=1mm},
+    point/.style={circle,inner sep=0pt,minimum size=1pt,fill=black!50},
+    interaction/.style={
+            %decorate,decoration={coil}
+            thin
+        },
+    >={Stealth[round]},
+    thick, black, text=black,
+    every new ->/.style={shorten >=1pt},
+    graphs/every graph/.style={edges=rounded corners},
+    spin/.style={
+            % The shape:
+            circle, draw, fill=white, minimum size=10pt,
+            font=\footnotesize
+        },
+    evenbond/.style={
+            % The shape:
+            rectangle split,
+            rectangle split parts=1,
+            % The size:
+            minimum size=4mm,
+            rounded corners=2mm,
+            % The border:
+            thin,
+            draw=color_evenbond_draw,
+            % The filling:
+            fill=color_evenbond_fill,
+            % Font
+            font=\scriptsize,
+            % Reduce inner separation
+            inner sep=1pt
+        },
+    oddbond/.style={
+            % The shape:
+            rectangle split,
+            rectangle split parts=2,
+            % The size:
+            minimum size=4mm,
+            rounded corners=2mm,
+            % The border:
+            thin,
+            draw=color_oddbond_draw,
+            % The filling:
+            fill=color_oddbond_fill,
+            % Font
+            font=\scriptsize,
+            % Reduce inner separation
+            inner sep=1pt
+        }
+    ]
+    \matrix (mat) [row sep=1mm,column sep=5mm] {
+        \node (site1) [spin, label={[label distance=3mm]below:$1$}] {};                                            &
+        \node (oddbond1) [oddbond] {$\omega^{(1)}_{-2}$ \nodepart{second} $\omega^{(1)}_{-1}$}; &
+        \node (site2) [spin, label={[label distance=3mm]below:$2$}] {};                                            &
+        \node (evenbond1) [evenbond] {$\omega^{(2)}_{-2}$};                                             &
+        \node (site3) [spin, label={[label distance=3mm]below:$3$}] {};                                           &
+        \node (site4) [] {$\cdots$};                                                                        &
+        \node (site5) [spin, label={[label distance=3mm]below:$L-2$}] {};                                           &
+        \node (evenbond2) [evenbond] {$\omega^{(L-2)}_{-2}$};                                             &
+        \node (site6) [spin, label={[label distance=3mm]below:$L-1$}] {};                                           &
+        \node (oddbond2) [oddbond] {$\omega^{(L-1)}_{-2}$ \nodepart{second} $\omega^{(L-1)}_{-1}$}; &
+        \node (site7) [spin, label={[label distance=3mm]below:$L$}] {};                                             \\
+    };
+
+    % Draw arrows separately
+    \foreach \i in {1, 2, 3, 5, 6, 7} {
+            \pgfmathsetmacro{\angle}{int(rand*36)*10}
+            \draw[->, thick] (site\i) ++(\angle:-5mm) -- ++(\angle:10mm);
+        }
+
+    \graph [use existing nodes] {
+    site1 -- [interaction] oddbond1 -- [interaction] site2 -- [interaction] evenbond1 -- [interaction] site3 -- [interaction] site4 -- [interaction] site5 -- [interaction] evenbond2 -- [interaction] site6 -- [interaction] oddbond2 -- [interaction] site7;
+    };
+\end{tikzpicture}
+\end{document}
