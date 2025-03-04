@@ -9,7 +9,20 @@ In the diagram, a spin is represented by a circle with an (randomly directed) ar
 To compile the diagram, please use the following command:
 
 ```bash
+# "lualatex" is part of the "texlive" distribution
 lualatex diagram.tikz
 ```
 
-A PDF file `diagram.pdf` will be generated.
+Alternatively, for the LaTeX Workshop extension in Visual Studio Code, you can compile with the command:
+
+1. `Ctrl+Alt+P` calls the command palette
+2. Type `recipe`, and select `LaTeX Workshop: Build with recipe`
+3. Select `latexmk (lualatex)` from the list
+4. `Ctrl+Alt+V` to view the PDF file
+
+A PDF file `diagram.pdf` will be generated. To convert it to an `jpg` image, you can use the following command:
+
+```bash
+# "magick" is provided by the "imagemagick" tool
+magick -density 300 diagram.pdf -quality 90 diagram.jpg
+```
