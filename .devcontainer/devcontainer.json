@@ -5,7 +5,9 @@
     "james-yu.latex-workshop"
   ],
   "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "latex-workshop.latex.recipe.default": "lastUsed"
   },
-  "postCreateCommand": "apt-get update && apt-get install -y imagemagick"
+  "postCreateCommand": "apt-get update && apt-get install -y imagemagick",
+  // "remoteUser": "vscode"
 }
